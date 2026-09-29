@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#f4f6fa"><title>Cable Connecting Designer</title>
+<style>
+:root{--bg:#f3f5f9;--paper:#fff;--ink:#202638;--muted:#798196;--line:#e5e8ef;--accent:#5b67e8;--shadow:0 3px 12px #20263818;--grid:24px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select{font:inherit;color:inherit}button{cursor:pointer;border:1px solid var(--line);background:white;border-radius:10px;padding:9px 13px;box-shadow:0 3px 7px #20263819;transition:transform .12s,box-shadow .12s}button:hover{box-shadow:0 4px 12px #20263825}button:active{transform:scale(.9)}button:disabled{opacity:.4;cursor:default}.primary{background:var(--accent);border-color:var(--accent);color:white}.icon-btn{width:40px;height:40px;padding:0;font-size:20px;display:grid;place-items:center}.quiet{background:transparent;box-shadow:none}.danger{color:#cc4242}.hidden{display:none!important}.app{min-height:100dvh}.topbar{height:62px;display:flex;align-items:center;gap:12px;padding:0 22px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}.brand{font-weight:750;font-size:16px;letter-spacing:-.3px;display:flex;align-items:center;gap:9px}.brandmark{width:30px;height:30px;border-radius:9px;background:#5b67e8;color:white;display:grid;place-items:center;font-size:17px}.top-spacer{flex:1}.topbar .project-name{font-weight:650}.color-control{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--muted)}input[type=color]{border:0;background:transparent;width:28px;height:28px;padding:0;cursor:pointer}.toolbar{display:flex;align-items:center;gap:8px;padding:10px 18px;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap}.toolbar-group{display:flex;align-items:center;gap:7px;padding-right:11px;border-right:1px solid var(--line)}.toolbar-group:last-child{border:0}.toolbar button{padding:8px 10px;border-radius:9px;font-size:13px}.tool-active{background:#eef0ff!important;color:#4753db!important;border-color:#cfd3ff!important}.workspace{height:calc(100dvh - 114px);min-height:360px;overflow:hidden;position:relative;background-color:#fbfcfe;background-image:radial-gradient(#dce1eb 1px,transparent 1px);background-size:var(--grid) var(--grid);touch-action:none;cursor:grab}.workspace.panning{cursor:grabbing}.world{position:absolute;left:0;top:0;width:4000px;height:3000px;transform-origin:0 0}.wires{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}.wire{fill:none;stroke:#5361db;stroke-width:3;pointer-events:stroke;cursor:pointer}.wire:hover{stroke-width:5}.wire.selected{stroke:#ed8d39;stroke-width:4}.wire-label{font-size:13px;font-weight:650;fill:#343c59;paint-order:stroke;stroke:#fbfcfe;stroke-width:5;stroke-linejoin:round}.object{position:absolute;min-width:70px;min-height:52px;background:#fff;border:2px solid #6370e7;border-radius:9px;box-shadow:0 5px 13px #272e4a20;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;user-select:none;touch-action:none;cursor:move}.object.selected{outline:3px solid #7781ed50}.object strong{font-size:14px}.object small{font-size:11px;color:var(--muted);margin-top:3px}.object .port{position:absolute;width:12px;height:12px;background:white;border:3px solid #5361db;border-radius:50%;top:calc(50% - 6px)}.port.left{left:-8px}.port.right{right:-8px}.object-creation{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}.workspace-hint{position:absolute;left:18px;bottom:15px;padding:7px 10px;border-radius:8px;background:#fffD;color:var(--muted);font-size:12px;box-shadow:var(--shadow);pointer-events:none}.zoom-controls{position:absolute;right:15px;bottom:15px;display:flex;gap:7px}.zoom-controls button{width:38px;height:38px;padding:0;font-size:18px}.empty-state{text-align:center;padding:100px 16px;color:var(--muted)}.empty-state .emoji{font-size:40px}.empty-state h2{color:var(--ink);font-size:21px}.projects-page{max-width:1120px;margin:0 auto;padding:42px 26px}.page-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}.page-heading h1{font-size:25px;margin:0 0 5px}.page-heading p{margin:0;color:var(--muted)}.project-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}.project-card{background:white;border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:transform .15s,box-shadow .15s;position:relative}.project-card:hover{transform:translateY(-2px);box-shadow:0 8px 22px #20263818}.preview{height:155px;background-color:#fbfcfe;background-image:radial-gradient(#dce1eb 1px,transparent 1px);background-size:18px 18px;position:relative;overflow:hidden}.preview-node{position:absolute;background:white;border:2px solid #6370e7;border-radius:6px;width:75px;height:35px;box-shadow:0 2px 5px #20263820}.preview-wire{height:2px;background:#5361db;position:absolute;transform-origin:left center}.card-info{padding:13px 15px;display:flex;align-items:center;justify-content:space-between}.card-info strong{font-size:14px}.card-date{font-size:11px;color:var(--muted)}.card-menu{position:absolute;right:9px;top:9px;z-index:2}.card-menu button{width:34px;height:34px;padding:0;background:#fffE}.context-menu{position:fixed;z-index:9;background:white;border:1px solid var(--line);border-radius:10px;padding:5px;box-shadow:0 9px 30px #20263828;min-width:130px}.context-menu button{width:100%;text-align:left;border:0;box-shadow:none}.modal-layer{position:fixed;inset:0;background:#18203969;display:grid;place-items:center;z-index:20;padding:15px}.modal{width:min(470px,100%);max-height:90dvh;overflow:auto;background:white;border-radius:16px;padding:23px;box-shadow:0 20px 65px #161c3044}.modal h2{margin:0 0 16px;font-size:20px}.modal p{color:var(--muted);margin:0 0 15px}.field{display:block;margin:12px 0}.field span{display:block;font-size:12px;color:#626c81;margin-bottom:6px}.field input,.field select{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:9px;background:white;outline:none}.field input:focus,.field select:focus{border-color:#7f89ed;box-shadow:0 0 0 3px #6b77e51c}.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}.choice-list{display:grid;gap:8px}.choice-list button{text-align:left}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#242b3c;color:white;padding:9px 15px;border-radius:20px;z-index:30;box-shadow:var(--shadow)}.status-dot{width:7px;height:7px;background:#62be85;border-radius:50%;display:inline-block;margin-right:5px}.mobile-label{display:none}
+@media(max-width:700px){.topbar{height:56px;padding:0 12px;gap:8px}.brand{font-size:14px}.brandmark{width:28px;height:28px}.toolbar{padding:8px 10px;gap:6px}.toolbar-group{gap:5px;padding-right:7px}.toolbar button{font-size:12px;padding:8px}.workspace{height:calc(100dvh - 104px)}.topbar .color-control span{display:none}.topbar .project-name{font-size:13px}.projects-page{padding:26px 15px}.page-heading h1{font-size:21px}.project-grid{grid-template-columns:1fr 1fr;gap:11px}.preview{height:120px}.card-info{padding:10px}.card-info strong{font-size:12px}.card-date{display:none}.field-row{gap:8px}}
+</style><style>.workspace{cursor:default}.workspace.panning{cursor:grabbing}.wires{z-index:2}#objects{position:absolute;inset:0;z-index:1;pointer-events:none}.object{pointer-events:auto}.wire-hit{fill:none;stroke:transparent;stroke-width:18;pointer-events:stroke;cursor:grab}.wire-endpoint{fill:#fff;stroke:#5361db;stroke-width:3;r:7px;cursor:grab;pointer-events:all}.wire-endpoint:hover{fill:#e8eaff;stroke-width:4}.wire-endpoint:active{cursor:grabbing}.wire-label{pointer-events:none}.list-dropdown{position:absolute;top:calc(100% + 5px);right:8px;width:min(340px,calc(100vw - 16px));max-height:65vh;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 32px #2026382e;padding:8px;z-index:12}.list-heading{padding:8px 9px 5px;color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase}.list-entry{display:block;width:100%;text-align:left;border:0;box-shadow:none;padding:9px 10px;border-radius:8px;white-space:normal}.list-entry:hover{background:#f2f4ff;box-shadow:none}.list-entry small{display:block;color:var(--muted);font-size:11px;margin-top:2px}.list-empty{padding:7px 10px;color:var(--muted);font-size:12px}.cable-palette{position:absolute;top:calc(100% + 5px);right:150px;display:flex;flex-wrap:wrap;gap:7px;width:190px;padding:10px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 25px #20263825;z-index:12}.color-swatch{width:29px;height:29px;min-width:29px;padding:0;border:2px solid white;border-radius:50%;background:var(--swatch);box-shadow:0 0 0 1px #0002;cursor:pointer}.color-swatch:hover{box-shadow:0 0 0 2px #5966e8}.palette-hint{width:100%;font-size:11px;color:var(--muted);padding:1px 2px}</style>
+<style>.resize-handle{position:absolute;width:18px;height:18px;right:-7px;bottom:-7px;border:2px solid white;border-radius:5px;background:#5966e8;box-shadow:0 1px 4px #20263855;cursor:nwse-resize;touch-action:none}.connection-port{position:absolute;width:16px;height:16px;border:3px solid #5361db;border-radius:50%;background:#fff;z-index:5;cursor:crosshair;touch-action:none}.connection-port:hover{background:#e4e8ff;transform:scale(1.2)}.connection-port.cp-left{left:-9px;top:calc(50% - 8px)}.connection-port.cp-right{right:-9px;top:calc(50% - 8px)}.connection-port.cp-top{top:-9px;left:calc(50% - 8px)}.connection-port.cp-bottom{bottom:-9px;left:calc(50% - 8px)}</style></head>
+<body><div class="app" id="app"></div><div id="modalRoot"></div><div id="menuRoot"></div><div id="toastRoot"></div>
+<script>
+(()=>{'use strict';
+const KEY='ccd-projects-v1';let projects=load(),currentId=null,view='home',scale=1,pan={x:0,y:0},activeTool='select',history=[],future=[],selectedWire=null,drag=null,modalState=null,suppressWireClick=false;
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function load(){try{let data=JSON.parse(localStorage.getItem(KEY)||'[]');data.forEach(p=>{delete p.color;p.objects?.forEach(o=>{o.color||='#5966e8'})});return data}catch{return []}}function save(){localStorage.setItem(KEY,JSON.stringify(projects))}function project(){return projects.find(p=>p.id===currentId)}function uid(){return Math.random().toString(36).slice(2,10)}function toast(s){$('#toastRoot').innerHTML=`<div class="toast">${esc(s)}</div>`;setTimeout(()=>$('#toastRoot').innerHTML='',2200)}function stamp(){return new Date().toLocaleDateString('ja-JP',{year:'numeric',month:'short',day:'numeric'})}
+function render(){const p=project();$('#app').innerHTML=view==='home'?homeHTML():editorHTML(p);$('#projectColor')?.parentElement.remove();if(view==='editor'&&p){paintWorld();syncToolbar(p);let hint=$('#workspace .workspace-hint');hint.textContent=activeTool==='cable'?'オブジェクトの上・下・左・右の接続ポートを選択':activeTool==='object'?'キャンバスをクリックして配置':'左ドラッグ：オブジェクト移動・サイズ変更／ケーブル端点・折れ位置の移動　中クリックドラッグ：方眼移動';insertListDropdown(p);initCablePalette(p)}}
+function insertListDropdown(p){let spacer=$('#app .topbar .top-spacer');if(!spacer)return;let button=document.createElement('button');button.id='listToggle';button.textContent='一覧 ▾';button.title='オブジェクト・ケーブル一覧';spacer.after(button);let panel=document.createElement('div');panel.id='listDropdown';panel.className='list-dropdown hidden';let objects=p.objects.length?p.objects.map(o=>`<button class="list-entry" data-list-object="${o.id}">▢ ${esc(o.name)}<small>${Math.round(o.w)} × ${Math.round(o.h)}</small></button>`).join(''):'<div class="list-empty">オブジェクトはありません</div>';let wires=p.wires.length?p.wires.map(w=>{let a=p.objects.find(o=>o.id===w.from),b=p.objects.find(o=>o.id===w.to);return `<button class="list-entry" data-list-wire="${w.id}">⌁ ${esc(w.name||'名前未設定')}<small>${esc(a?.name||'自由端')} → ${esc(b?.name||'自由端')}${w.connectorA||w.connectorB?` · ${esc(w.connectorA||'なし')} / ${esc(w.connectorB||'なし')}`:''}</small></button>`}).join(''):'<div class="list-empty">ケーブルはありません</div>';panel.innerHTML=`<div class="list-heading">オブジェクト（${p.objects.length}）</div>${objects}<div class="list-heading">ケーブル（${p.wires.length}）</div>${wires}`;spacer.parentElement.append(panel)}
+function initCablePalette(p){let color=$('#cableColor');if(!color)return;let button=document.createElement('button');button.id='cablePaletteToggle';button.textContent='色 ▾';button.title='新しいケーブルの既定色';color.parentElement.after(button);let panel=document.createElement('div');panel.id='cablePalette';panel.className='cable-palette hidden';let choices=['#5866dc','#e64b4b','#ed8a28','#e0b51b','#36a269','#1596a5','#7854bc','#303642'];panel.innerHTML=`<div class="palette-hint">新しく作成するケーブルの既定色</div>${choices.map(c=>`<button class="color-swatch" data-cable-color="${c}" style="--swatch:${c}" title="${c}" aria-label="${c}"></button>`).join('')}`;$('#app .topbar').append(panel)}
+function focusListed(kind,id){let p=project(),point;if(kind==='object'){let o=p.objects.find(x=>x.id===id);if(!o)return;selectedWire=id;point={x:o.x+o.w/2,y:o.y+o.h/2}}else{let w=p.wires.find(x=>x.id===id);if(!w)return;selectedWire=id;let a=p.objects.find(x=>x.id===w.from),b=p.objects.find(x=>x.id===w.to),A=wireEndPoint(w,'from',a),B=wireEndPoint(w,'to',b);point={x:(A.x+B.x)/2,y:(A.y+B.y)/2}}let r=$('#workspace').getBoundingClientRect();pan.x=r.width/2-point.x*scale;pan.y=r.height/2-point.y*scale;render()}
+function homeHTML(){return `<header class="topbar"><div class="brand"><span class="brandmark">⌁</span>Cable Connecting Designer</div><div class="top-spacer"></div><span style="font-size:12px;color:var(--muted)"><i class="status-dot"></i>この端末に保存</span></header><main class="projects-page"><div class="page-heading"><div><h1>プロジェクト</h1><p>配線図を作成・管理しましょう</p></div><button class="primary" id="newProject">＋ 新規作成</button></div>${projects.length?`<div class="project-grid">${projects.map(p=>`<article class="project-card" data-open="${p.id}" oncontextmenu="event.preventDefault();showProjectMenu('${p.id}',event.clientX,event.clientY)"><button class="card-menu quiet" aria-label="メニュー" onclick="event.stopPropagation();showProjectMenu('${p.id}',event.clientX,event.clientY)">⋯</button><div class="preview">${previewHTML(p)}</div><div class="card-info"><strong>${esc(p.name)}</strong><span class="card-date">${p.updated||'新規'}</span></div></article>`).join('')}</div>`:`<div class="empty-state"><div class="emoji">🧩</div><h2>プロジェクトを作成しましょう</h2><p>＋ 新規作成から、最初の配線図を作れます。</p><button class="primary" id="newProject2">＋ プロジェクトを作成</button></div>`}</main>`}
+function previewHTML(p){if(!p.objects?.length)return '<div style="position:absolute;inset:0;display:grid;place-items:center;color:#a4aabd;font-size:12px">プレビュー</div>';let maxX=Math.max(160,...p.objects.map(o=>o.x+o.w)),maxY=Math.max(100,...p.objects.map(o=>o.y+o.h)),sx=140/maxX,sy=90/maxY,k=Math.min(sx,sy,1);return (p.wires||[]).map(w=>{let a=p.objects.find(o=>o.id===w.from),b=p.objects.find(o=>o.id===w.to);if(!a||!b)return '';let x=(a.x+a.w/2)*k,y=(a.y+a.h/2)*k,xx=(b.x+b.w/2)*k,yy=(b.y+b.h/2)*k,dx=xx-x,dy=yy-y;return `<i class="preview-wire" style="left:${x}px;top:${y}px;width:${Math.hypot(dx,dy)}px;transform:rotate(${Math.atan2(dy,dx)}rad)"></i>`}).join('')+p.objects.map(o=>`<i class="preview-node" style="left:${o.x*k}px;top:${o.y*k}px;width:${o.w*k}px;height:${o.h*k}px"></i>`).join('')}
+function editorHTML(p){if(!p)return homeHTML();return `<header class="topbar"><button id="back" class="quiet" style="padding:8px">← 戻る</button><div class="brand"><span class="brandmark">⌁</span></div><div class="project-name">${esc(p.name)}</div><div class="top-spacer"></div><label class="color-control"><span>プロジェクト</span><input type="color" id="projectColor" value="${p.color||'#5966e8'}"></label><label class="color-control"><span>ケーブル</span><input type="color" id="cableColor" value="${p.cableColor||'#5866dc'}"></label><button id="undo" title="やり直し（Ctrl+Z）" ${history.length?'':'disabled'}>↶</button><button id="redo" title="戻す（Ctrl+Y）" ${future.length?'':'disabled'}>↷</button><button id="export" class="primary">保存・書き出し</button></header><nav class="toolbar"><div class="toolbar-group"><button id="selectTool" class="${activeTool==='select'?'tool-active':''}">↖ 選択</button><button id="objectTool" class="${activeTool==='object'?'tool-active':''}">▢ オブジェクト＋</button><button id="cableTool" class="${activeTool==='cable'?'tool-active':''}">⌁ ケーブル＋</button></div><div class="toolbar-group"><button id="connectorManage">🔌 コネクター登録</button><button id="styleSetup">Aa 文字・表示設定</button></div><div class="toolbar-group"><span style="font-size:12px;color:var(--muted)">${p.objects.length} オブジェクト · ${p.wires.length} ケーブル</span></div></nav><main class="workspace" id="workspace"><div class="world" id="world"><svg class="wires" id="wires"></svg><div id="objects"></div></div><div class="workspace-hint">${activeTool==='cable'?'始点のオブジェクト、次に終点をクリック':activeTool==='object'?'キャンバスをクリックして配置':'ドラッグで移動 · スクロール/ピンチで拡大縮小 · 空白をドラッグで移動'}</div><div class="zoom-controls"><button id="zoomOut">−</button><button id="zoomReset" style="font-size:12px">${Math.round(scale*100)}%</button><button id="zoomIn">＋</button></div></main>`}
+function syncToolbar(p){$('#world').style.transform=`translate(${pan.x}px,${pan.y}px) scale(${scale})`;$('#workspace').style.setProperty('--grid',`${24*scale}px`);$('#workspace').classList.toggle('panning',!!drag?.pan);$('#workspace').style.cursor=activeTool==='cable'?'crosshair':activeTool==='object'?'copy':'';}
+function anchorPoint(o,a,sideOverride){let side=sideOverride||a?.side||'right',t=Math.max(0,Math.min(1,a?.t??.5));if(side==='left')return{x:o.x,y:o.y+o.h*t};if(side==='right')return{x:o.x+o.w,y:o.y+o.h*t};if(side==='top')return{x:o.x+o.w*t,y:o.y};return{x:o.x+o.w*t,y:o.y+o.h}}
+function anchorFromWorldPoint(o,pt,orientation){let x=pt.x-o.x,y=pt.y-o.y,all=[{side:'left',d:x,t:y/o.h},{side:'right',d:o.w-x,t:y/o.h},{side:'top',d:y,t:x/o.w},{side:'bottom',d:o.h-y,t:x/o.w}],eligible=orientation==='vertical'?all.filter(a=>a.side==='top'||a.side==='bottom'):orientation==='horizontal'?all.filter(a=>a.side==='left'||a.side==='right'):all,nearest=eligible.sort((a,b)=>a.d-b.d)[0];return{side:nearest.side,t:Math.max(0,Math.min(1,nearest.t))}}
+function anchorOnFace(o,pt,side){let t=(side==='left'||side==='right')?(pt.y-o.y)/o.h:(pt.x-o.x)/o.w;return{side,t:Math.max(0,Math.min(1,t))}}
+function anchorFromEvent(el,e,orientation){let o=project().objects.find(x=>x.id===el.dataset.object);return anchorFromWorldPoint(o,workspacePoint(e),orientation)}
+function objectAtPoint(pt){let o=[...project().objects].reverse().find(o=>pt.x>=o.x&&pt.x<=o.x+o.w&&pt.y>=o.y&&pt.y<=o.y+o.h);return o?document.querySelector(`[data-object="${o.id}"]`):null}
+function wireEndPoint(w,end,obj){let free=w[end+'Free'];if(free)return{x:free.x,y:free.y};return anchorPoint(obj,w[end==='from'?'fromAnchor':'toAnchor'])}
+function routeAroundObjects(start,end,objects,excluded){const pad=9,obs=objects.filter(o=>!excluded.has(o.id)).map(o=>({l:o.x-pad,r:o.x+o.w+pad,t:o.y-pad,b:o.y+o.h+pad})),xs=[start.x,end.x],ys=[start.y,end.y];obs.forEach(o=>{xs.push(o.l,o.r);ys.push(o.t,o.b)});const unique=v=>[...new Set(v.map(n=>Math.round(n*100)/100))].sort((a,b)=>a-b);let X=unique(xs),Y=unique(ys),nx=X.length,ny=Y.length,inside=(x,y)=>obs.some(o=>x>o.l&&x<o.r&&y>o.t&&y<o.b),clear=(a,b)=>{if(Math.abs(a.x-b.x)<.01)return !obs.some(o=>a.x>o.l&&a.x<o.r&&Math.max(Math.min(a.y,b.y),o.t)<Math.min(Math.max(a.y,b.y),o.b));if(Math.abs(a.y-b.y)<.01)return !obs.some(o=>a.y>o.t&&a.y<o.b&&Math.max(Math.min(a.x,b.x),o.l)<Math.min(Math.max(a.x,b.x),o.r));return false};let sx=X.indexOf(Math.round(start.x*100)/100),sy=Y.indexOf(Math.round(start.y*100)/100),tx=X.indexOf(Math.round(end.x*100)/100),ty=Y.indexOf(Math.round(end.y*100)/100),sid=sx*ny+sy,tid=tx*ny+ty;if(inside(start.x,start.y)||inside(end.x,end.y))return null;let n=nx*ny,dist=new Float64Array(n);dist.fill(Infinity);let prev=new Int32Array(n);prev.fill(-1);let closed=new Uint8Array(n),heap=[];const push=(id,g,f)=>{let q=heap.length;heap.push({id,g,f});while(q){let par=(q-1)>>1;if(heap[par].f<=f)break;heap[q]=heap[par];q=par}heap[q]={id,g,f}},pop=()=>{let top=heap[0],last=heap.pop();if(heap.length){let i=0;while(true){let l=i*2+1,r=l+1;if(l>=heap.length)break;let c=r<heap.length&&heap[r].f<heap[l].f?r:l;if(heap[c].f>=last.f)break;heap[i]=heap[c];i=c}heap[i]=last}return top};dist[sid]=0;push(sid,0,Math.abs(start.x-end.x)+Math.abs(start.y-end.y));while(heap.length){let cur=pop(),id=cur.id;if(closed[id])continue;if(id===tid)break;closed[id]=1;let ix=Math.floor(id/ny),iy=id%ny,pt={x:X[ix],y:Y[iy]};for(const [jx,jy] of [[ix-1,iy],[ix+1,iy],[ix,iy-1],[ix,iy+1]]){if(jx<0||jx>=nx||jy<0||jy>=ny)continue;let next=jx*ny+jy,q={x:X[jx],y:Y[jy]};if(closed[next]||inside(q.x,q.y)||!clear(pt,q))continue;let ng=dist[id]+Math.abs(pt.x-q.x)+Math.abs(pt.y-q.y);if(ng<dist[next]){dist[next]=ng;prev[next]=id;push(next,ng,ng+Math.abs(q.x-end.x)+Math.abs(q.y-end.y))}}}if(!Number.isFinite(dist[tid]))return null;let path=[];for(let id=tid;id!==-1;id=prev[id])path.push({x:X[Math.floor(id/ny)],y:Y[id%ny]});path.reverse();return path}
+function simplifyRoute(points){let out=[];for(const p of points){if(out.length>=2){let a=out[out.length-2],b=out[out.length-1];if((Math.abs(a.x-b.x)<.01&&Math.abs(b.x-p.x)<.01)||(Math.abs(a.y-b.y)<.01&&Math.abs(b.y-p.y)<.01))out.pop()}if(!out.length||Math.abs(out[out.length-1].x-p.x)>.01||Math.abs(out[out.length-1].y-p.y)>.01)out.push(p)}return out}
+function cableVertical(w,A,B){let sa=w.fromFree?null:(w.fromAnchor?.side||'right'),sb=w.toFree?null:(w.toAnchor?.side||'left');if(['top','bottom'].includes(sa)||['top','bottom'].includes(sb))return true;if(sa||sb)return false;return Math.abs(B.y-A.y)>Math.abs(B.x-A.x)}
+function wirePath(w,a,b){let A=wireEndPoint(w,'from',a),B=wireEndPoint(w,'to',b),gap=22,dirs={left:[-gap,0],right:[gap,0],top:[0,-gap],bottom:[0,gap]},sa=w.fromFree?null:(w.fromAnchor?.side||'right'),sb=w.toFree?null:(w.toAnchor?.side||'left'),da=sa?dirs[sa]:[0,0],db=sb?dirs[sb]:[0,0],A2={x:A.x+da[0],y:A.y+da[1]},B2={x:B.x+db[0],y:B.y+db[1]},vertical=cableVertical(w,A2,B2),off=Number(w.routeOffset)||0,objects=project()?.objects||[a,b],excluded=new Set(),points;if(off){let via=vertical?{x:(A2.x+B2.x)/2,y:(A2.y+B2.y)/2+off}:{x:(A2.x+B2.x)/2+off,y:(A2.y+B2.y)/2};let left=routeAroundObjects(A2,via,objects,excluded),right=routeAroundObjects(via,B2,objects,excluded);if(left&&right)points=[...left,...right.slice(1)]}if(!points)points=routeAroundObjects(A2,B2,objects,excluded);if(!points)points=[A2,{x:A2.x,y:B2.y},B2];points=simplifyRoute([A,A2,...points.slice(1,-1),B2,B]);return 'M '+points.map(p=>`${p.x} ${p.y}`).join(' L ')}
+function drawCablePreview(e){let svg=$('#wires'),p=project(),start=drag?.wireStart&&p.objects.find(o=>o.id===drag.wireStart);if(!svg||!start)return;svg.querySelector('#wirePreview')?.remove();let pt=workspacePoint(e),node=objectAtPoint(pt),tmp={fromAnchor:drag.startAnchor,toFree:pt},end=pt,b=null;if(node){b=p.objects.find(o=>o.id===node.dataset.object);if(b){if(drag.previewObjectId!==b.id){drag.previewObjectId=b.id;drag.previewSide=anchorFromWorldPoint(b,pt).side}tmp.toFree=null;tmp.toAnchor=anchorOnFace(b,pt,drag.previewSide);end=anchorPoint(b,tmp.toAnchor)}}else{drag.previewObjectId=null;drag.previewSide=null}let g=document.createElementNS('http://www.w3.org/2000/svg','g');g.id='wirePreview';g.setAttribute('pointer-events','none');g.innerHTML=`<path d="${wirePath(tmp,start,b)}" fill="none" stroke="${p.cableColor}" stroke-width="3" stroke-dasharray="7 5"/><circle cx="${end.x}" cy="${end.y}" r="6" fill="white" stroke="${p.cableColor}" stroke-width="3"/>`;svg.append(g)}
+function paintWorld(){let p=project();const layer=$('#objects'),svg=$('#wires'),ports=activeTool==='cable'?'<span class="connection-port cp-left" data-face="left" title="左面"></span><span class="connection-port cp-right" data-face="right" title="右面"></span><span class="connection-port cp-top" data-face="top" title="上面"></span><span class="connection-port cp-bottom" data-face="bottom" title="下面"></span>':'';layer.innerHTML=p.objects.map(o=>`<div class="object ${selectedWire===o.id?'selected':''}" data-object="${o.id}" style="left:${o.x}px;top:${o.y}px;width:${o.w}px;height:${o.h}px;border-color:${o.color||'#5966e8'};font-size:${o.fontSize||14}px"><strong>${esc(o.name)}</strong><small>${Math.round(o.w)} × ${Math.round(o.h)}</small>${ports}<span class="resize-handle" title="角をドラッグしてサイズ変更"></span></div>`).join('');svg.innerHTML=p.wires.map(w=>{let a=p.objects.find(o=>o.id===w.from),b=p.objects.find(o=>o.id===w.to);if(!a||!b)return '';let A=wireEndPoint(w,'from',a),B=wireEndPoint(w,'to',b),mx=(A.x+B.x)/2,my=(A.y+B.y)/2,ta=w.terminalA||'',tb=w.terminalB||'',d=wirePath(w,a,b);return `<path class="wire-hit" data-wire="${w.id}" d="${d}"/><path class="wire ${selectedWire===w.id?'selected':''}" data-wire="${w.id}" d="${d}" style="stroke:${w.color||p.cableColor}"/><circle class="wire-endpoint" r="7" data-wire="${w.id}" data-end="from" cx="${A.x}" cy="${A.y}"/><circle class="wire-endpoint" r="7" data-wire="${w.id}" data-end="to" cx="${B.x}" cy="${B.y}"/><text class="wire-label" x="${mx}" y="${my-7}" text-anchor="middle">${esc(w.name||'ケーブル名を設定')}</text>${ta?`<text class="wire-label" x="${A.x}" y="${A.y-8}" text-anchor="middle">${esc(ta)}${w.connectorA?` · ${esc(w.connectorA)}`:''}</text>`:''}${tb?`<text class="wire-label" x="${B.x}" y="${B.y-8}" text-anchor="middle">${esc(tb)}${w.connectorB?` · ${esc(w.connectorB)}`:''}</text>`:''}`}).join('');bindCanvas()}
+function snapshot(){let p=project();history.push(JSON.stringify(p));if(history.length>60)history.shift();future=[]}
+function bindCanvas(){const ws=$('#workspace');ws.querySelectorAll('.object').forEach(el=>{el.onclick=e=>{e.stopPropagation();objectClick(el.dataset.object,e)};el.onpointerdown=e=>{if(activeTool!=='select'||e.button!==0)return;e.stopPropagation();let o=project().objects.find(x=>x.id===el.dataset.object),resize=e.target.closest('.resize-handle');drag={id:o.id,resize:!!resize,x:e.clientX,y:e.clientY,ox:o.x,oy:o.y,ow:o.w,oh:o.h,moved:false,before:JSON.stringify(project()),anchor:anchorFromEvent(el,e)};el.setPointerCapture(e.pointerId)};el.onpointermove=e=>{if(!drag||drag.pan||drag.id!==el.dataset.object)return;let dx=(e.clientX-drag.x)/scale,dy=(e.clientY-drag.y)/scale;if(Math.abs(dx)+Math.abs(dy)>2)drag.moved=true;if(drag.moved){let o=project().objects.find(x=>x.id===drag.id);if(drag.resize){o.w=Math.max(70,drag.ow+dx);o.h=Math.max(52,drag.oh+dy);el.style.width=o.w+'px';el.style.height=o.h+'px';el.querySelector('small').textContent=`${Math.round(o.w)} × ${Math.round(o.h)}`}else{o.x=Math.max(0,drag.ox+dx);o.y=Math.max(0,drag.oy+dy);el.style.left=o.x+'px';el.style.top=o.y+'px'}drawWires()}};el.onpointerup=e=>{if(drag?.id===el.dataset.object){if(drag.moved){history.push(drag.before);future=[];persist()}drag=null}}});svgClickBind()}
+function drawWires(){let p=project(),svg=$('#wires');if(!svg)return;svg.innerHTML=p.wires.map(w=>{let a=p.objects.find(o=>o.id===w.from),b=p.objects.find(o=>o.id===w.to);if(!a||!b)return '';let A=wireEndPoint(w,'from',a),B=wireEndPoint(w,'to',b),m={x:(A.x+B.x)/2,y:(A.y+B.y)/2},d=wirePath(w,a,b);return `<path class="wire-hit" data-wire="${w.id}" d="${d}"/><path class="wire ${selectedWire===w.id?'selected':''}" data-wire="${w.id}" d="${d}" style="stroke:${w.color||p.cableColor}"/><circle class="wire-endpoint" r="7" data-wire="${w.id}" data-end="from" cx="${A.x}" cy="${A.y}"/><circle class="wire-endpoint" r="7" data-wire="${w.id}" data-end="to" cx="${B.x}" cy="${B.y}"/><text class="wire-label" x="${m.x}" y="${m.y-7}" text-anchor="middle">${esc(w.name||'ケーブル名を設定')}</text>${w.terminalA?`<text class="wire-label" x="${A.x}" y="${A.y-8}" text-anchor="middle">${esc(w.terminalA)}${w.connectorA?` · ${esc(w.connectorA)}`:''}</text>`:''}${w.terminalB?`<text class="wire-label" x="${B.x}" y="${B.y-8}" text-anchor="middle">${esc(w.terminalB)}${w.connectorB?` · ${esc(w.connectorB)}`:''}</text>`:''}`}).join('');svgClickBind()}
+function svgClickBind(){$$('#wires .wire,#wires .wire-hit,#wires .wire-endpoint').forEach(el=>{el.onpointerdown=e=>{if(e.button!==0)return;e.stopPropagation();let w=project().wires.find(x=>x.id===el.dataset.wire);if(el.classList.contains('wire-endpoint')){let end=el.dataset.end,anchor=w[end==='from'?'fromAnchor':'toAnchor'];drag={endpoint:true,wireId:w.id,end,x:e.clientX,y:e.clientY,oldId:w[end],snapObjectId:w[end+'Free']?null:w[end],snapSide:anchor?.side||null,before:JSON.stringify(project()),moved:false};$('#workspace').setPointerCapture(e.pointerId);return}let a=project().objects.find(o=>o.id===w.from),b=project().objects.find(o=>o.id===w.to),vertical=cableVertical(w,wireEndPoint(w,'from',a),wireEndPoint(w,'to',b));drag={wireId:w.id,x:e.clientX,y:e.clientY,baseOffset:Number(w.routeOffset)||0,axis:vertical?'y':'x',before:JSON.stringify(project()),moved:false};$('#workspace').setPointerCapture(e.pointerId)};el.onclick=e=>{e.stopPropagation();if(suppressWireClick||el.classList.contains('wire-endpoint'))return;selectedWire=el.dataset.wire;wireDialog(el.dataset.wire)}})}
+function $$(s){return [...document.querySelectorAll(s)]}function snapshotAfterMutation(){let p=project();future=[];history.push(JSON.stringify({...p,objects:p.objects.map(o=>({...o}))}));if(history.length>60)history.shift()}function persist(){let p=project();p.updated=stamp();save();syncToolbar(p)}
+function objectClick(id,e){if(activeTool==='cable'){let el=document.querySelector(`[data-object="${id}"]`),face=e.target.closest('[data-face]'),anchor=face?{side:face.dataset.face,t:.5}:anchorFromEvent(el,e);if(!drag?.wireStart){drag={wireStart:id,startAnchor:anchor};toast('終点のオブジェクトの接続面を選んでください')}else if(drag.wireStart!==id){const from=drag.wireStart,fromAnchor=drag.startAnchor;drag=null;createWire(from,id,fromAnchor,anchor)}return}selectedWire=id}
+function workspacePoint(e){let r=$('#workspace').getBoundingClientRect();return {x:(e.clientX-r.left-pan.x)/scale,y:(e.clientY-r.top-pan.y)/scale}}
+$('#app').addEventListener('click',e=>{if(e.target.closest('#cablePaletteToggle')){$('#cablePalette').classList.toggle('hidden');return}let cableSwatch=e.target.closest('[data-cable-color]');if(cableSwatch){setCableColor(cableSwatch.dataset.cableColor);return}if(e.target.closest('#listToggle')){$('#listDropdown').classList.toggle('hidden');return}let objectEntry=e.target.closest('[data-list-object]');if(objectEntry){focusListed('object',objectEntry.dataset.listObject);return}let wireEntry=e.target.closest('[data-list-wire]');if(wireEntry){focusListed('wire',wireEntry.dataset.listWire);return}if(e.target.closest('#newProject,#newProject2'))newProjectDialog();if(e.target.closest('[data-open]')){currentId=e.target.closest('[data-open]').dataset.open;view='editor';scale=1;pan={x:30,y:30};render()}if(e.target.closest('#back')){view='home';activeTool='select';render()}if(e.target.closest('#objectTool')){activeTool='object';render()}if(e.target.closest('#cableTool')){activeTool='cable';drag=null;render()}if(e.target.closest('#selectTool')){activeTool='select';drag=null;render()}if(e.target.closest('#connectorManage'))connectorDialog();if(e.target.closest('#styleSetup'))styleDialog();if(e.target.closest('#export'))exportDialog();if(e.target.closest('#undo'))undo();if(e.target.closest('#redo'))redo();if(e.target.closest('#zoomIn'))zoomAt(1.18);if(e.target.closest('#zoomOut'))zoomAt(1/1.18);if(e.target.closest('#zoomReset')){scale=1;pan={x:30,y:30};render()}});
+function setCableColor(color){snapshot();project().cableColor=color;persist();render()}
+document.addEventListener('input',e=>{if(e.target.id==='cableColor'){project().cableColor=e.target.value;persist()}});
+document.addEventListener('pointerdown',e=>{let ws=e.target.closest('#workspace');if(!ws||e.target.closest('.object')||e.target.closest('.zoom-controls'))return;if(activeTool==='object'&&e.button===0){let pt=workspacePoint(e);objectDialog(pt);return}if(e.target.closest('.wire'))return;if(!(e.button===1||e.pointerType==='touch'))return;e.preventDefault();drag={pan:true,x:e.clientX,y:e.clientY,px:pan.x,py:pan.y};ws.setPointerCapture(e.pointerId);ws.classList.add('panning')});document.addEventListener('pointermove',e=>{if(activeTool==='cable'&&drag?.wireStart){drawCablePreview(e);return}if(drag?.endpoint){let p=project(),w=p.wires.find(x=>x.id===drag.wireId),end=drag.end;if(!w)return;let pt=workspacePoint(e),node=objectAtPoint(pt);if(Math.abs(e.clientX-drag.x)+Math.abs(e.clientY-drag.y)>2)drag.moved=true;if(node){let newId=node.dataset.object;if(drag.snapObjectId!==newId){if(w[end]!==newId){if(end==='from')w.terminalA='';else w.terminalB=''}drag.snapObjectId=newId;drag.snapSide=anchorFromWorldPoint(p.objects.find(o=>o.id===newId),pt).side}w[end]=newId;w[end+'Free']=null;w[end==='from'?'fromAnchor':'toAnchor']=anchorOnFace(p.objects.find(o=>o.id===newId),pt,drag.snapSide)}else{drag.snapObjectId=null;drag.snapSide=null;w[end+'Free']=pt}drawWires();return}if(drag?.wireId){let w=project().wires.find(x=>x.id===drag.wireId);if(w){let delta=(drag.axis==='x'?e.clientX-drag.x:e.clientY-drag.y)/scale;if(Math.abs(delta)>2)drag.moved=true;if(drag.moved){w.routeOffset=drag.baseOffset+delta;drawWires()}}return}if(!drag?.pan)return;pan.x=drag.px+e.clientX-drag.x;pan.y=drag.py+e.clientY-drag.y;syncToolbar(project())});document.addEventListener('pointerup',e=>{if(drag?.endpoint){if(drag.moved){history.push(drag.before);future=[];persist();suppressWireClick=true;setTimeout(()=>suppressWireClick=false,0)}drag=null;return}if(drag?.wireId){let id=drag.wireId;if(drag.moved){history.push(drag.before);future=[];persist()}else{selectedWire=id;suppressWireClick=true;setTimeout(()=>suppressWireClick=false,0);wireDialog(id)}drag=null;return}if(drag?.pan){drag=null;$('#workspace')?.classList.remove('panning')} });
+document.addEventListener('wheel',e=>{if(!e.target.closest('#workspace'))return;e.preventDefault();zoomAt(e.deltaY<0?1.1:1/1.1,e.clientX,e.clientY)},{passive:false});function zoomAt(mult,x,y){let ws=$('#workspace');if(!ws)return;let r=ws.getBoundingClientRect(),cx=x??r.left+r.width/2,cy=y??r.top+r.height/2,ratio=Math.max(.35,Math.min(2.5,scale*mult))/scale;pan.x=cx-r.left-(cx-r.left-pan.x)*ratio;pan.y=cy-r.top-(cy-r.top-pan.y)*ratio;scale*=ratio;syncToolbar(project());$('#zoomReset').textContent=Math.round(scale*100)+'%'}
+function newProjectDialog(){showModal(`<h2>新しいプロジェクト</h2><label class="field"><span>プロジェクト名</span><input id="projectName" placeholder="例：制御盤 配線図" autofocus></label><div class="modal-actions"><button data-close>キャンセル</button><button class="primary" id="createProject">作成する</button></div>`);$('#createProject').onclick=()=>{let name=$('#projectName').value.trim();if(!name){$('#projectName').focus();return}let p={id:uid(),name,cableColor:'#5866dc',objects:[],wires:[],connectors:[],updated:stamp()};projects.unshift(p);save();closeModal();currentId=p.id;view='editor';scale=1;pan={x:30,y:30};render()}}
+function objectDialog(pt){showModal(`<h2>オブジェクトを追加</h2><p>長方形の機器や部品をキャンバスに配置します。</p><label class="field"><span>オブジェクト名</span><input id="objectName" placeholder="例：電源ユニット"></label><div class="field-row"><label class="field"><span>横幅（px）</span><input id="objectW" type="number" min="70" value="150"></label><label class="field"><span>高さ（px）</span><input id="objectH" type="number" min="52" value="82"></label></div><div class="modal-actions"><button data-close>キャンセル</button><button class="primary" id="addObject">配置する</button></div>`);$('#addObject').onclick=()=>{let name=$('#objectName').value.trim()||'オブジェクト';snapshot();project().objects.push({id:uid(),name,x:Math.max(0,pt.x),y:Math.max(0,pt.y),w:Math.max(70,+$('#objectW').value||150),h:Math.max(52,+$('#objectH').value||82),color:'#5966e8',fontSize:14});persist();closeModal();activeTool='select';render()};$('#objectName').focus()}
+function createWire(from,to,fromAnchor,toAnchor){snapshot();let w={id:uid(),from,to,fromAnchor,toAnchor,name:'',terminalA:'',terminalB:'',connectorA:'',connectorB:'',color:project().cableColor};project().wires.push(w);persist();activeTool='select';render();stepWire(w.id,0)}
+function stepWire(id,n){let w=project().wires.find(x=>x.id===id);if(!w)return;let title=n===0?'ケーブル名':n===1?'端子名':'始端・終端コネクター';let p=project(),conns=p.connectors.map(x=>`<option>${esc(x)}</option>`).join('');showModal(`<h2>${title}を設定</h2><p>${n===0?'ケーブルの名前を入力してください。':n===1?'始点と終点の端子名を入力してください。':'始端と終端それぞれのコネクター規格を選択できます。コネクターがない側は未選択のままにしてください。'}</p>${n===0?`<label class="field"><span>ケーブル名</span><input id="wireName" placeholder="例：電源線"></label>`:n===1?`<div class="field-row"><label class="field"><span>始点の端子名</span><input id="termA" placeholder="例：＋24V"></label><label class="field"><span>終点の端子名</span><input id="termB" placeholder="例：VCC"></label></div>`:`<div class="field-row"><label class="field"><span>始端コネクター / 規格</span><select id="connectorA"><option value="">なし / スキップ</option>${conns}</select><input id="newConnectorA" placeholder="新しい規格を入力"></label><label class="field"><span>終端コネクター / 規格</span><select id="connectorB"><option value="">なし / スキップ</option>${conns}</select><input id="newConnectorB" placeholder="新しい規格を入力"></label></div>`}<div class="modal-actions"><button data-close>スキップ</button><button class="primary" id="nextStep">${n===2?'完了':'次へ'}</button></div>`);$('#nextStep').onclick=()=>{if(n===0)w.name=$('#wireName').value.trim();if(n===1){w.terminalA=$('#termA').value.trim();w.terminalB=$('#termB').value.trim()}if(n===2){let a=$('#newConnectorA').value.trim(),b=$('#newConnectorB').value.trim();w.connectorA=a||$('#connectorA').value;w.connectorB=b||$('#connectorB').value;[a,b].filter(Boolean).forEach(c=>{if(!p.connectors.includes(c))p.connectors.push(c)})}persist();closeModal();if(n<2)stepWire(id,n+1);else render()}}
+function wireDialog(id){let w=project().wires.find(x=>x.id===id);if(!w)return;let opts=(v)=>`<option value="">なし</option>${project().connectors.map(c=>`<option value="${esc(c)}" ${v===c?'selected':''}>${esc(c)}</option>`).join('')}`;showModal(`<h2>ケーブルを編集</h2><label class="field"><span>ケーブル名</span><input id="editWireName" value="${esc(w.name)}" placeholder="例：信号線"></label><div class="field-row"><label class="field"><span>始点端子名</span><input id="editTA" value="${esc(w.terminalA)}"></label><label class="field"><span>終点端子名</span><input id="editTB" value="${esc(w.terminalB)}"></label></div><div class="field-row"><label class="field"><span>始端コネクター / 規格</span><select id="editConnA">${opts(w.connectorA||w.connector)}</select></label><label class="field"><span>終端コネクター / 規格</span><select id="editConnB">${opts(w.connectorB||w.connector)}</select></label></div><label class="field"><span>このケーブルの色</span><input id="editWireColor" type="color" value="${w.color||project().cableColor}" style="width:70px;height:35px"></label><div class="modal-actions"><button class="danger" id="deleteWire">削除</button><span style="flex:1"></span><button data-close>キャンセル</button><button class="primary" id="saveWire">保存</button></div>`);$('#saveWire').onclick=()=>{snapshot();w.name=$('#editWireName').value.trim();w.terminalA=$('#editTA').value.trim();w.terminalB=$('#editTB').value.trim();w.connectorA=$('#editConnA').value;w.connectorB=$('#editConnB').value;w.color=$('#editWireColor').value;persist();closeModal();render()};$('#deleteWire').onclick=()=>{snapshot();project().wires=project().wires.filter(x=>x.id!==id);persist();closeModal();render()}}
+function connectorDialog(){let p=project();showModal(`<h2>コネクター登録</h2><p>規格を登録すると、ケーブル作成時に選択できます。</p><div class="field-row"><label class="field" style="flex:1"><span>コネクター名</span><input id="connName" placeholder="例：M12 A-coded 4P"></label><button id="addConn" style="align-self:end;margin-bottom:12px">追加</button></div><div class="choice-list">${p.connectors.length?p.connectors.map((c,i)=>`<button class="conn-delete" data-i="${i}">🔌 ${esc(c)} <span style="float:right;color:#ba5555">削除</span></button>`).join(''):'<p>登録済みの規格はありません。</p>'}</div><div class="modal-actions"><button data-close>閉じる</button></div>`);$('#addConn').onclick=()=>{let s=$('#connName').value.trim();if(s&&!p.connectors.includes(s)){snapshot();p.connectors.push(s);persist();connectorDialog()}};$$('.conn-delete').forEach(b=>b.onclick=()=>{snapshot();p.connectors.splice(+b.dataset.i,1);persist();connectorDialog()})}
+function styleDialog(){let p=project(),objectColor=p.objects[0]?.color||'#5966e8';showModal(`<h2>文字・表示設定</h2><p>オブジェクトやケーブルの表示スタイルを設定します。</p><label class="field"><span>オブジェクト名の文字サイズ（px）</span><input id="fontSize" type="number" min="10" max="32" value="${p.fontSize||14}"></label><label class="field"><span>オブジェクト名の太さ</span><select id="fontWeight"><option value="600" ${p.fontWeight==='600'?'selected':''}>標準</option><option value="700" ${p.fontWeight==='700'?'selected':''}>太字</option></select></label><label class="field"><span>オブジェクト枠の色</span><input id="styleColor" type="color" value="${objectColor}" style="width:70px;height:35px"></label><div class="modal-actions"><button data-close>キャンセル</button><button class="primary" id="saveStyle">保存</button></div>`);$('#saveStyle').onclick=()=>{snapshot();let p=project(),color=$('#styleColor').value;p.fontSize=+$('#fontSize').value||14;p.fontWeight=$('#fontWeight').value;p.objects.forEach(o=>{o.fontSize=p.fontSize;o.color=color});persist();closeModal();render()}}
+function exportDialog(){showModal(`<h2>保存・書き出し</h2><p>プロジェクトはこの端末のブラウザーに自動保存されます。形式を選択してください。</p><div class="choice-list"><button id="exportPng">🖼️ 画像（PNG）</button><button id="exportPdf">📄 PDF（印刷）</button><button id="exportJson">💾 プロジェクトデータ（JSON）</button></div><div class="modal-actions"><button data-close>閉じる</button></div>`);$('#exportPng').onclick=()=>{closeModal();exportPNG()};$('#exportPdf').onclick=()=>{closeModal();window.print()};$('#exportJson').onclick=()=>{let blob=new Blob([JSON.stringify(project(),null,2)],{type:'application/json'});download(blob,`${project().name}.json`);closeModal()}}
+function exportPNG(){let p=project(),pad=45,maxX=Math.max(400,...p.objects.map(o=>o.x+o.w)),maxY=Math.max(260,...p.objects.map(o=>o.y+o.h)),c=document.createElement('canvas');c.width=maxX+pad*2;c.height=maxY+pad*2;let x=c.getContext('2d');x.fillStyle='#fbfcfe';x.fillRect(0,0,c.width,c.height);x.strokeStyle='#e8ebf1';x.lineWidth=1;for(let i=0;i<c.width;i+=24){x.beginPath();x.moveTo(i,0);x.lineTo(i,c.height);x.stroke()}for(let i=0;i<c.height;i+=24){x.beginPath();x.moveTo(0,i);x.lineTo(c.width,i);x.stroke()}p.wires.forEach(w=>{let a=p.objects.find(o=>o.id===w.from),b=p.objects.find(o=>o.id===w.to);if(!a||!b)return;let sx=a.x+a.w+pad,sy=a.y+a.h/2+pad,ex=b.x+pad,ey=b.y+b.h/2+pad,m=(sx+ex)/2;x.strokeStyle=w.color||p.cableColor;x.lineWidth=3;x.beginPath();x.moveTo(sx,sy);x.bezierCurveTo(m,sy,m,ey,ex,ey);x.stroke();x.fillStyle='#343c59';x.font='600 13px sans-serif';x.textAlign='center';x.fillText(w.name||'',m,(sy+ey)/2-7)});p.objects.forEach(o=>{x.fillStyle='#fff';x.strokeStyle=o.color||p.color;x.lineWidth=2;x.beginPath();x.roundRect(o.x+pad,o.y+pad,o.w,o.h,9);x.fill();x.stroke();x.fillStyle='#202638';x.font=`600 ${o.fontSize||14}px sans-serif`;x.textAlign='center';x.textBaseline='middle';x.fillText(o.name,o.x+pad+o.w/2,o.y+pad+o.h/2-7);x.fillStyle='#798196';x.font='11px sans-serif';x.fillText(`${o.w} × ${o.h}`,o.x+pad+o.w/2,o.y+pad+o.h/2+12)});c.toBlob(b=>download(b,`${p.name}.png`))}
+function exportPNG(){let p=project(),pad=45,maxX=Math.max(400,...p.objects.map(o=>o.x+o.w)),maxY=Math.max(260,...p.objects.map(o=>o.y+o.h)),c=document.createElement('canvas');c.width=maxX+pad*2;c.height=maxY+pad*2;let x=c.getContext('2d');x.fillStyle='#fbfcfe';x.fillRect(0,0,c.width,c.height);x.strokeStyle='#e8ebf1';x.lineWidth=1;for(let i=0;i<c.width;i+=24){x.beginPath();x.moveTo(i,0);x.lineTo(i,c.height);x.stroke()}for(let i=0;i<c.height;i+=24){x.beginPath();x.moveTo(0,i);x.lineTo(c.width,i);x.stroke()}p.wires.forEach(w=>{let a=p.objects.find(o=>o.id===w.from),b=p.objects.find(o=>o.id===w.to);if(!a||!b)return;let pts=wirePath(w,a,b).replace(/^M\s*/,'').split(/\s+L\s+/).map(s=>s.trim().split(/\s+/).map(Number));x.strokeStyle=w.color||p.cableColor;x.lineWidth=3;x.beginPath();pts.forEach((pt,i)=>i?x.lineTo(pt[0]+pad,pt[1]+pad):x.moveTo(pt[0]+pad,pt[1]+pad));x.stroke();x.fillStyle='#343c59';x.font='600 13px sans-serif';x.textAlign='center';let mid=pts[Math.floor(pts.length/2)];x.fillText(w.name||'',mid[0]+pad,mid[1]+pad-7)});p.objects.forEach(o=>{x.fillStyle='#fff';x.strokeStyle=o.color||p.color;x.lineWidth=2;x.beginPath();x.roundRect(o.x+pad,o.y+pad,o.w,o.h,9);x.fill();x.stroke();x.fillStyle='#202638';x.font=`600 ${o.fontSize||14}px sans-serif`;x.textAlign='center';x.textBaseline='middle';x.fillText(o.name,o.x+pad+o.w/2,o.y+pad+o.h/2-7);x.fillStyle='#798196';x.font='11px sans-serif';x.fillText(`${o.w} × ${o.h}`,o.x+pad+o.w/2,o.y+pad+o.h/2+12)});c.toBlob(b=>download(b,`${p.name}.png`))}
+function download(blob,name){let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href)}function showModal(html){$('#modalRoot').innerHTML=`<div class="modal-layer"><section class="modal">${html}</section></div>`;$('#modalRoot').querySelector('.modal-layer').onclick=e=>{if(e.target.classList.contains('modal-layer'))closeModal()};$$('[data-close]').forEach(b=>b.onclick=closeModal)}function closeModal(){$('#modalRoot').innerHTML=''}
+function showProjectMenu(id,x,y){$('#menuRoot').innerHTML=`<div class="context-menu" style="left:${Math.min(x,innerWidth-145)}px;top:${Math.min(y,innerHeight-90)}px"><button class="danger" id="deleteProject">🗑 削除</button></div>`;$('#deleteProject').onclick=()=>{let p=projects.find(x=>x.id===id);showModal(`<h2>プロジェクトを削除</h2><p>「${esc(p.name)}」を削除します。この操作は取り消せません。</p><div class="modal-actions"><button data-close>キャンセル</button><button class="danger" id="confirmDelete">削除</button></div>`);$('#confirmDelete').onclick=()=>{projects=projects.filter(x=>x.id!==id);save();closeModal();$('#menuRoot').innerHTML='';render()}};setTimeout(()=>document.addEventListener('pointerdown',()=>$('#menuRoot').innerHTML='',{once:true}),0)}
+function undo(){if(!history.length)return;future.push(JSON.stringify(project()));let prev=JSON.parse(history.pop());projects=projects.map(p=>p.id===prev.id?prev:p);save();render()}function redo(){if(!future.length)return;history.push(JSON.stringify(project()));let next=JSON.parse(future.pop());projects=projects.map(p=>p.id===next.id?next:p);save();render()}
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();e.shiftKey?redo():undo()}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='y'){e.preventDefault();redo()}if(e.key==='Escape'){closeModal();$('#menuRoot').innerHTML='';activeTool='select';drag=null;if(view==='editor')render()}});window.showProjectMenu=showProjectMenu;
+render();
+window.__ccdShareAPI={getProject:()=>project(),findImported:id=>projects.find(p=>p.sharedSourceId===id),importShared(copy){projects.unshift(copy);save();currentId=copy.id;view='editor';activeTool='select';scale=1;pan={x:30,y:30};render()},openImported(copy){currentId=copy.id;view='editor';activeTool='select';scale=1;pan={x:30,y:30};render()}};
+})();
+</script><script src="share.js"></script></body></html>
+
+(() => {
+  'use strict';
+
+  // Fill these with the NEW sharing-only project's URL and publishable key.
+  const SUPABASE_URL = 'https://gjlfbjqsfdjybupwhhdw.supabase.co';
+  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_png0kpbpaT3OCoZO1UR5-Q_Fv7qDa79';
+  let clientPromise;
+
+  const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[ch]);
+
+  function notify(message) {
+    const root = document.getElementById('toastRoot');
+    if (!root) return;
+    root.textContent = '';
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    root.append(toast);
+    setTimeout(() => { if (toast.isConnected) toast.remove(); }, 3000);
+  }
+
+  function showShareModal(html) {
+    const root = document.getElementById('modalRoot');
+    root.innerHTML = '<div class="modal-layer"><section class="modal">' + html + '</section></div>';
+    root.querySelector('.modal-layer').addEventListener('click', event => {
+      if (event.target.classList.contains('modal-layer')) root.replaceChildren();
+    });
+    root.querySelectorAll('[data-share-close]').forEach(button => {
+      button.addEventListener('click', () => root.replaceChildren());
+    });
+  }
+
+  function getClient() {
+    if (clientPromise) return clientPromise;
+    if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
+      return Promise.reject(new Error('share.jsに共有専用SupabaseのURLとPublishable keyを設定してください'));
+    }
+    clientPromise = new Promise((resolve, reject) => {
+      const initialize = () => {
+        if (!window.supabase?.createClient) {
+          reject(new Error('Supabaseライブラリを読み込めませんでした'));
+          return;
+        }
+        resolve(window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY));
+      };
+      if (window.supabase?.createClient) return initialize();
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+      script.onload = initialize;
+      script.onerror = () => reject(new Error('Supabaseライブラリの読み込みに失敗しました'));
+      document.head.append(script);
+    });
+    return clientPromise;
+  }
+
+  function makeShareId() {
+    if (crypto.randomUUID) return crypto.randomUUID();
+    const bytes = crypto.getRandomValues(new Uint8Array(16));
+    bytes[6] = (bytes[6] & 0x0f) | 0x40;
+    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+    const hex = [...bytes].map(value => value.toString(16).padStart(2, '0')).join('');
+    return hex.slice(0, 8) + '-' + hex.slice(8, 12) + '-' + hex.slice(12, 16) + '-' + hex.slice(16, 20) + '-' + hex.slice(20);
+  }
+
+  async function createShareLink() {
+    const api = window.__ccdShareAPI;
+    const project = api?.getProject();
+    if (!project) return;
+    if (location.protocol !== 'https:') {
+      showShareModal('<h2>Web公開後に共有できます</h2><p>共有URLにはアプリの公開URLが必要です。GitHub Pagesなどへ公開した後、このプロジェクトから共有リンクを作成してください。</p><div class="modal-actions"><button data-share-close>閉じる</button></div>');
+      return;
+    }
+
+    const button = document.getElementById('shareProject');
+    if (button) button.disabled = true;
+    try {
+      const client = await getClient();
+      const sessionResult = await client.auth.getSession();
+      if (sessionResult.error) throw sessionResult.error;
+      if (!sessionResult.data.session) {
+        const signInResult = await client.auth.signInAnonymously();
+        if (signInResult.error) throw signInResult.error;
+      }
+      const userResult = await client.auth.getUser();
+      if (userResult.error || !userResult.data.user) {
+        throw userResult.error || new Error('匿名ログインに失敗しました');
+      }
+
+      const payload = JSON.parse(JSON.stringify(project));
+      delete payload.sharedSourceId;
+      if (new TextEncoder().encode(JSON.stringify(payload)).length > 500000) {
+        throw new Error('配線図のデータが大きすぎます（500KB以下にしてください）');
+      }
+      const id = makeShareId();
+      const insertResult = await client.from('shared_diagrams').insert({
+        id,
+        owner_id: userResult.data.user.id,
+        payload
+      });
+      if (insertResult.error) throw insertResult.error;
+
+      const url = new URL(location.href);
+      url.searchParams.set('id', id);
+      url.hash = '';
+      showShareModal('<h2>共有リンクを作成しました</h2><p>リンク先では閲覧用データが表示され、受け取った人の端末に編集用コピーが作られます。</p><label class="field"><span>共有URL</span><input id="sharedUrl" value="' + escapeHtml(url.href) + '" readonly></label><div class="modal-actions"><button data-share-close>閉じる</button><button class="primary" id="copySharedUrl">URLをコピー</button></div>');
+      document.getElementById('copySharedUrl').addEventListener('click', async () => {
+        const input = document.getElementById('sharedUrl');
+        try {
+          await navigator.clipboard.writeText(url.href);
+        } catch {
+          input.select();
+          document.execCommand('copy');
+        }
+        notify('共有URLをコピーしました');
+      });
+    } catch (error) {
+      showShareModal('<h2>共有リンクを作成できませんでした</h2><p>' + escapeHtml(error?.message || 'Supabaseへの接続に失敗しました') + '</p><p>共有用プロジェクトでSQLを実行し、匿名サインインを有効にしてください。</p><div class="modal-actions"><button data-share-close>閉じる</button></div>');
+    } finally {
+      if (button?.isConnected) button.disabled = false;
+    }
+  }
+
+  const numberInRange = (value, fallback, min, max) => {
+    const number = Number(value);
+    return Number.isFinite(number) ? Math.max(min, Math.min(max, number)) : fallback;
+  };
+  const shortText = (value, fallback = '', max = 120) =>
+    typeof value === 'string' ? value.slice(0, max) : fallback;
+  const validColor = (value, fallback) =>
+    typeof value === 'string' && /^#[0-9a-f]{6}$/i.test(value) ? value : fallback;
+  const safePoint = value => value && typeof value === 'object' ? {
+    x: numberInRange(value.x, 0, 0, 100000),
+    y: numberInRange(value.y, 0, 0, 100000)
+  } : null;
+
+  function sanitizeSharedProject(source, shareId) {
+    if (!source || typeof source !== 'object' || !Array.isArray(source.objects) || !Array.isArray(source.wires)) {
+      throw new Error('共有データの形式が正しくありません');
+    }
+    const idMap = new Map();
+    const objects = [];
+    for (const object of source.objects.slice(0, 500)) {
+      if (!object || typeof object !== 'object' || object.id == null) continue;
+      const oldId = String(object.id);
+      if (idMap.has(oldId)) continue;
+      const id = Math.random().toString(36).slice(2, 10);
+      idMap.set(oldId, id);
+      objects.push({
+        id,
+        name: shortText(object.name, 'オブジェクト'),
+        x: numberInRange(object.x, 0, 0, 100000),
+        y: numberInRange(object.y, 0, 0, 100000),
+        w: numberInRange(object.w, 150, 70, 3000),
+        h: numberInRange(object.h, 82, 52, 3000),
+        color: validColor(object.color, '#5966e8'),
+        fontSize: numberInRange(object.fontSize, 14, 10, 32)
+      });
+    }
+    const side = (value, fallback) => ['left', 'right', 'top', 'bottom'].includes(value) ? value : fallback;
+    const anchor = (value, fallback) => ({
+      side: side(value?.side, fallback),
+      t: numberInRange(value?.t, 0.5, 0, 1)
+    });
+    const wires = [];
+    for (const wire of source.wires.slice(0, 1500)) {
+      if (!wire || typeof wire !== 'object' || !idMap.has(String(wire.from)) || !idMap.has(String(wire.to))) continue;
+      wires.push({
+        id: Math.random().toString(36).slice(2, 10),
+        from: idMap.get(String(wire.from)),
+        to: idMap.get(String(wire.to)),
+        fromAnchor: anchor(wire.fromAnchor, 'right'),
+        toAnchor: anchor(wire.toAnchor, 'left'),
+        fromFree: safePoint(wire.fromFree),
+        toFree: safePoint(wire.toFree),
+        name: shortText(wire.name),
+        terminalA: shortText(wire.terminalA),
+        terminalB: shortText(wire.terminalB),
+        connectorA: shortText(wire.connectorA),
+        connectorB: shortText(wire.connectorB),
+        color: validColor(wire.color, '#5866dc'),
+        routeOffset: numberInRange(wire.routeOffset, 0, -100000, 100000)
+      });
+    }
+    return {
+      id: Math.random().toString(36).slice(2, 10),
+      name: shortText(source.name, '共有プロジェクト', 100) + '（共有コピー）',
+      cableColor: validColor(source.cableColor, '#5866dc'),
+      objects,
+      wires,
+      connectors: Array.isArray(source.connectors)
+        ? source.connectors.slice(0, 100).map(value => shortText(value, '', 100)).filter(Boolean)
+        : [],
+      fontSize: numberInRange(source.fontSize, 14, 10, 32),
+      fontWeight: source.fontWeight === '700' ? '700' : '600',
+      sharedSourceId: shareId,
+      updated: new Date().toLocaleDateString('ja-JP', { year: 'numeric', month: 'short', day: 'numeric' })
+    };
+  }
+
+  async function importSharedProject() {
+    const shareId = new URLSearchParams(location.search).get('id');
+    if (!shareId) return;
+    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(shareId)) {
+      notify('共有URLのIDが正しくありません');
+      return;
+    }
+    try {
+      const client = await getClient();
+      const result = await client.rpc('read_shared_diagram', { p_id: shareId });
+      if (result.error) throw result.error;
+      if (!result.data) throw new Error('共有データが見つからないか、削除されています');
+      const api = window.__ccdShareAPI;
+      let project = api.findImported(shareId);
+      const existed = Boolean(project);
+      if (project) api.openImported(project);
+      else {
+        project = sanitizeSharedProject(result.data, shareId);
+        api.importShared(project);
+      }
+      notify(existed ? '共有プロジェクトを開きました' : '共有プロジェクトを端末にコピーしました');
+    } catch (error) {
+      notify('共有データを読み込めませんでした。共有用Supabaseの設定をご確認ください');
+      console.error('Shared project import failed', error);
+    }
+  }
+
+  function ensureShareButton() {
+    const exportButton = document.getElementById('export');
+    if (!exportButton || document.getElementById('shareProject')) return;
+    const button = document.createElement('button');
+    button.id = 'shareProject';
+    button.type = 'button';
+    button.textContent = '共有リンク';
+    button.title = 'この配線図を閲覧専用リンクで共有';
+    exportButton.before(button);
+  }
+
+  const app = document.getElementById('app');
+  new MutationObserver(ensureShareButton).observe(app, { childList: true, subtree: true });
+  ensureShareButton();
+  document.addEventListener('click', event => {
+    if (event.target.closest('#shareProject')) createShareLink();
+  });
+  void importSharedProject();
+})();
+
